@@ -42,7 +42,16 @@ namespace MauiAppTempoAgora.Services
                         sunset = sunset.ToString(),
 
                     };//Fecha obj do Tempo
-                }//Fecha if se o status do servidor foi de sucesso
+                } //Fecha if se o status do servidor foi de sucesso
+                else if (resp.StatusCode == System.Net.HttpStatusCode.NotFound) //Código 404
+                {
+                    throw new Exception("Cidade não encontrada. Verifique o nome digitado."); 
+                    //t = null;
+                }
+                else
+                {
+                    throw new Exception($"Erro na requisição: {resp.StatusCode}");
+                }
             }//fecha laço using
 
             return t;
